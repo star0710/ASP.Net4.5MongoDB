@@ -1,0 +1,50 @@
+﻿@model MongoDBTest.Models.ProxyAPICallModels
+
+<hgroup class="title">
+    <h1>ProxyAPICall</h1>
+    <h2>Create a new log of ProxyAPI.</h2>
+</hgroup>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>新增ProxyAPI呼叫記錄</legend>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.API_Name)
+                @Html.TextBoxFor(m => m.API_Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Parameters)
+                @Html.TextBoxFor(m => m.Parameters)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.API_CName)
+                @Html.TextBoxFor(m => m.API_CName)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ReturnCode)
+                @Html.TextBoxFor(m => m.ReturnCode)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ReturnData)
+                @Html.TextBoxFor(m => m.ReturnData)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Description)
+                @Html.TextBoxFor(m => m.Description)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.ExecuteUser)
+                @Html.TextBoxFor(m => m.ExecuteUser)
+            </li>
+        </ol>
+        <input type="submit" value="Create" />
+    </fieldset>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

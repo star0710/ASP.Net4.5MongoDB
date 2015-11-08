@@ -1,0 +1,48 @@
+﻿<script type="text/javascript">
+    //asp.net日期格式 轉 javascript日期 (yyyy-MM-dd hh:mm:ss)
+    function TransferDateTime(source) {
+        var dt = new Date(parseInt(source.substring(6, source.length - 2)));
+        var year = dt.getFullYear() + "";
+        var month = (dt.getMonth() + 1) + "";
+        var day = dt.getDate() + "";
+        var hour = dt.getHours();
+        var mouth = dt.getMinutes();
+        var second = dt.getSeconds();
+        if (month.length == 1) { month = "0" + month; }
+        if (day.length == 1) { day = "0" + day; }
+        if (hour < 10) { hour = "0" + hour; }
+        if (mouth < 10) { mouth = "0" + mouth; }
+        if (second < 10) { second = "0" + second; }
+
+        var dtString = year + "-" + month + "-" + day + " " + hour + ":" + mouth + ":" + second;
+        return dtString;
+    }
+
+    $(function () {
+        $.getJSON('/Home/ProxyAPICall_Load/', function (data) {
+            for (var i in data) {
+                var Parameters = $.parseJSON(data[i].Parameters);
+                var str = '<tr><td>' + data[i].ID + '</td><td>' + data[i].API_Name + '</td><td>' + Parameters.UserId + '</td><td><textarea rows="3" style="width: 150px;">' + data[i].Parameters + '</textarea></td>';
+                str += '<td>' + data[i].API_CName + '</td><td>' + data[i].ReturnCode + '</td><td><textarea rows="3" style="width: 150px;">' + data[i].ReturnData + '</textarea></td>';
+                str += '<td>' + data[i].Description + '</td><td>' + data[i].ExecuteUser + '</td><td>' + TransferDateTime(data[i].CTime) + '</td></tr>';
+                $('#tb').append(str);
+            }
+            console.log("success");
+        })
+        .done(function (data) {            
+            console.log("second success");
+        })
+        .fail(function (data) {
+            console.log("error");
+        })
+        .always(function (data) {
+            console.log("complete");
+        });
+    });
+</script>
+
+<h2>ProxyAPICall_ListAll</h2>
+
+<table id="tb">
+    <tr><th>ID</th><th>API_Name</th><th>UserId</th><th>Parameters</th><th>API_CName</th><th>ReturnCode</th><th>ReturnData</th><th>Description</th><th>ExecuteUser</th><th>CTime</th></tr>
+</table>
