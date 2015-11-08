@@ -14,7 +14,7 @@ namespace MongoDBTest.Models
             IMongoCollection<BsonDocument> collection = null;
             try
             {
-                var client = new MongoClient("mongodb://H3HybridMain:2wsx$RFV6yhn@210.64.215.244:27017/Log");
+                var client = new MongoClient("mongodb://test:aa1234@localhost:27017/Log");
                 //MongoDB.Driver 2.0.1
                 var database = client.GetDatabase("Log");
 
